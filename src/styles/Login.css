@@ -1,0 +1,62 @@
+.Login{
+
+    background-color: #fc8d84;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 6px 4px 41px -3px rgba(0,0,0,0.75);
+    padding: 100px;
+    text-align: center; /* 1 add this for centering the element (outer*/
+    height: 100%;
+
+    margin: 0;
+    min-height: 100%;
+
+}
+form{
+    display: inline-block; /* 2 add this for centering the element (inner)*/
+}
+
+.Login-title{
+    text-align: center;
+}
+
+a{
+    display: block;
+    margin: 10px;
+}
+.Login-label{
+    margin-left: 10px;
+    text-align: center;
+}
+
+.Login-input {
+    margin: 10px;
+    text-align: center;
+    display: block;
+    width: 230px;
+    border-radius: 5px;
+}
+
+
+.Login-button {
+    box-shadow:inset 0px 1px 0px 0px white;
+	background:linear-gradient(to bottom, white 5%, white 100%);
+	background-color:white;
+	border-radius:6px;
+	border:1px solid #d83526;
+	cursor:pointer;
+	color:black;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:2px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+	height: 25px;
+	margin: 10px;
+
+}
+
+.red{
+    color: red,
+}
