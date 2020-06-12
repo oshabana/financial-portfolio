@@ -7,3 +7,4 @@ It features:
   - REST api
   - Uses external APIs to grab the correct price for your assets
   
+The main use is to allow users to track their assets with accuracy and have it all in one place.
