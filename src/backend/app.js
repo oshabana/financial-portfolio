@@ -16,20 +16,25 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 app.use(cp())
 
 app.get('/', (req, res) => {
-   res.send("Hello");
+   res.send("Welcome to the asset portfolio app");
 });
 
 app.post('/signup', async(req, res) => {
-    const user = new User(req.body);
 
+    const testEmail = await User.findOne({ email: req.body.params.email });
+    if (testEmail){
+        res.json({err: "email taken"})
+    }
     try {
+
+        const user = new User(req.body.params);
         user.password = await bcrypt.hash(user.password, 8);
         await user.save();
         const token = await user.generateAuthToken();
-
+        
         res.end();
     } catch (err) {
-        res.status(400).send("sign up error");
+        res.send("sign up error");
     }
 });
 

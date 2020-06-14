@@ -39,7 +39,9 @@ class PortfolioPage extends Component {
             display = <div> Loading... </div>)
 
         return (
-            display
+            
+                display
+            
         )
     };
 }

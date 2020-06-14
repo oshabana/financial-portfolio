@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import "./styles/Login.css"
 import {Switch, Link, Route} from 'react-router-dom'
+import PortfolioPage from './PortfolioPage'
 import Signup from './Signup'
 import axios from 'axios'
 
@@ -29,9 +30,9 @@ class Login extends Component {
             this.props.login(response.data) 
         }
         else
-         this.setState({isInvalid: true})
+            this.setState({isInvalid: true})
 
-     
+
     }
 
     handleChange (e){
@@ -68,6 +69,7 @@ class Login extends Component {
                 </form>
                 <Switch>
                     <Route exact path="/signup" render={() => <Signup/>}/>
+                    <Route exact path="/portfolio" render={() => <PortfolioPage logout={this.logout} user={this.state.user}/>}/>
                 </Switch>   
             </div>
         )
