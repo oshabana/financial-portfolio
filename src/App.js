@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import PortfolioPage from "./PortfolioPage"
-import Portfolio from "./Portfolio"
 import Login from './Login'
 import Signup from "./Signup"
 import './styles/App.css';
 import axios from 'axios';
 import Cookies from 'js-cookie'
-import {Switch, Link, Route,Redirect} from 'react-router-dom'
+import {Switch, Route,Redirect} from 'react-router-dom'
 //require('dotenv').config() would need but i have create-react-app
 
 class App extends Component{

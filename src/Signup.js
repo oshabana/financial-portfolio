@@ -1,6 +1,9 @@
 import React, { Component} from 'react';
 import "./styles/Signup.css"
 import axios from 'axios'
+import {Redirect, Router, Route} from 'react-router-dom'
+import Login from "./Login"
+
 class Signup extends Component {
 
     constructor(props) {
@@ -8,15 +11,17 @@ class Signup extends Component {
     
         this.state = {
              email: "testfolio@test.com",
-             password1: "test321",
-             password2: "test321",
+             password1: "test123",
+             password2: "test123",
              emailError: false,
              passwordError: false,
-             signupError: false
+             signupError: false,
+             signupCompleted: false
         }
         this.signup = this.signup.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
+
     async signup(e){
         e.preventDefault()
         if (this.state.password1 !== this.state.password2){
@@ -31,6 +36,8 @@ class Signup extends Component {
         try{
             const response = await axios.post(`${process.env.REACT_APP_URL}/signup`, {params: userInfo},{withCredentials: true})
             if(response.data.err) this.setState({emailError: true})
+            this.setState({signupCompleted: true})
+            return <Redirect to="/login"></Redirect>
         }
         catch (err) {
             this.setState({signupError: true})
@@ -45,9 +52,12 @@ class Signup extends Component {
         return (
             <div className="Signup">
                 <h3 className="Signup-title">Sign up</h3>
+
                 {(this.state.passwordError ? <p className="error">Password don't match</p>: "")}
                 {(this.state.emailError ? <p className="error">An account with email already exists</p>: "")}
                 {(this.state.signupError ? <p className="error">Something went wrong</p>: "")}
+                {(this.state.signupCompleted && !this.state.signupError ? <p className="success">Thank you for signing up! </p> : "")}
+
                 <form className="Signup-form" onSubmit={this.signup}>
                     <label className="Signup-label" htmlFor="email"/>
                     <input
@@ -79,6 +89,7 @@ class Signup extends Component {
                     <button className="Signup-button">Sign up</button>
             
                 </form>
+               
             </div>
         )
     }

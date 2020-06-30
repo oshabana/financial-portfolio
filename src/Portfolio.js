@@ -4,7 +4,6 @@ import PortfolioTab from "./PortfolioTab";
 import PortfolioForm from "./PortfolioForm"
 import PortfolioValueTab from "./PortfolioValueTab"
 import axios from "axios";
-import Cookies from 'js-cookie'
 
 
 
