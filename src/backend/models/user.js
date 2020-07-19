@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
+const validator = require("validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema({
         unique: true,
         validate(value) {
             if (!validator.isEmail(value)) {
-                throw new Error('Enter a valid email');
+                throw new Error("Enter a valid email");
             }
-        }
+        },
     },
     password: {
         type: String,
@@ -21,67 +21,70 @@ const userSchema = new mongoose.Schema({
         minlength: 7,
         trim: true,
         validate(value) {
-            if (value.toLowerCase().includes('password')) {
-                throw new Error('Please choose a harder password');
+            if (value.toLowerCase().includes("password")) {
+                throw new Error("Please choose a harder password");
             }
-        }
+        },
     },
     portfolio: {
         type: Object,
-        required: true
+        required: true,
     },
-    tokens:{
+    tokens: {
         type: Object,
-        required: false
-    }
-   
+        required: false,
+    },
 });
 
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 });
 
-userSchema.methods.generateAuthToken = async function(userAgent) {
+userSchema.methods.generateAuthToken = async function (userAgent) {
     const user = this;
-    const token = jwt.sign({ _id: user._id.toString() }, process.env.PASS_PHRASE, {expiresIn:'7 days'}); //should be in an .env
+    const token = jwt.sign(
+        { _id: user._id.toString() },
+        process.env.PASS_PHRASE,
+        { expiresIn: "7 days" }
+    ); //should be in an .env
     let tokens = user.tokens;
-    tokens[token] = userAgent // I dont really care about the value :(
-    await user.updateOne({tokens: tokens})
+    tokens[token] = userAgent; // I dont really care about the value :(
+    await user.updateOne({ tokens: tokens });
 
     return token;
 };
 
-userSchema.statics.findByCredentials = async(email, password) => {
+userSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({ email: email });
     if (!user) {
-        throw new Error('No user with that email and password combination');
+        throw new Error("No user with that email and password combination");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-        throw new Error('No user with that email and password combination');
+        throw new Error("No user with that email and password combination");
     }
     return user;
 };
 
 userSchema.statics.findById = async (id) => {
-    const user = await User.findOne({_id: id});
-    if(!user){
-        throw new Error('Not Found');
+    const user = await User.findOne({ _id: id });
+    if (!user) {
+        throw new Error("Not Found");
     }
     return user;
 };
 
 userSchema.statics.verifyCookie = async (id, potentialToken) => {
-    const user = await User.findOne({ _id: id})
-    if(!user){
-        return false
+    const user = await User.findOne({ _id: id });
+    if (!user) {
+        return false;
     }
-    if(user.tokens[potentialToken] !== undefined){
-        if(jwt.verify(potentialToken,process.env.PASS_PHRASE )) return true // otherwise your session has expired
+    if (user.tokens[potentialToken] !== undefined) {
+        if (jwt.verify(potentialToken, process.env.PASS_PHRASE)) return true; // otherwise your session has expired
     }
     /* old way of doing it with a tokens list (inefficient O(n))
     for(let i = 0; i < user.tokens.length; i++){
@@ -90,27 +93,27 @@ userSchema.statics.verifyCookie = async (id, potentialToken) => {
         }
     }
     */
-    return false
+    return false;
 };
 userSchema.statics.santizeTokenDB = async (id) => {
-    const user = await User.findOne({ _id: id})
-    if(!user){
-        return
+    const user = await User.findOne({ _id: id });
+    if (!user) {
+        return;
     }
-    for (let token in user.tokens){
-        console.log(jwt.verify(token,process.env.PASS_PHRASE))
-        if(!jwt.verify(token,process.env.PASS_PHRASE)){
-            await user.deleteOne({tokens: token})
-            console.log(user.tokens)
+    for (let token in user.tokens) {
+        console.log(jwt.verify(token, process.env.PASS_PHRASE));
+        if (!jwt.verify(token, process.env.PASS_PHRASE)) {
+            await user.deleteOne({ tokens: token });
+            console.log(user.tokens);
         }
     }
-}
+};
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
-userSchema.pre('save', async function() {
+userSchema.pre("save", async function () {
     const user = this;
-    if (user.isModified('password')) {
+    if (user.isModified("password")) {
         user.password = await bcrypt.hash(user.password, 8);
     }
 });
