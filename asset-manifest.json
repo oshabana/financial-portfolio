@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/financial-portfolio/static/css/main.a3fab3b0.chunk.css",
-    "main.js": "/financial-portfolio/static/js/main.4c84ad83.chunk.js",
-    "main.js.map": "/financial-portfolio/static/js/main.4c84ad83.chunk.js.map",
+    "main.js": "/financial-portfolio/static/js/main.eae2d889.chunk.js",
+    "main.js.map": "/financial-portfolio/static/js/main.eae2d889.chunk.js.map",
     "runtime-main.js": "/financial-portfolio/static/js/runtime-main.5d55e10b.js",
     "runtime-main.js.map": "/financial-portfolio/static/js/runtime-main.5d55e10b.js.map",
     "static/js/2.a647a9e4.chunk.js": "/financial-portfolio/static/js/2.a647a9e4.chunk.js",
     "static/js/2.a647a9e4.chunk.js.map": "/financial-portfolio/static/js/2.a647a9e4.chunk.js.map",
     "index.html": "/financial-portfolio/index.html",
-    "precache-manifest.64174c8c3ad18303c01f128b5ec3a6b2.js": "/financial-portfolio/precache-manifest.64174c8c3ad18303c01f128b5ec3a6b2.js",
+    "precache-manifest.e6823332bf6e0d786c520b849fa4bd1e.js": "/financial-portfolio/precache-manifest.e6823332bf6e0d786c520b849fa4bd1e.js",
     "service-worker.js": "/financial-portfolio/service-worker.js",
     "static/css/main.a3fab3b0.chunk.css.map": "/financial-portfolio/static/css/main.a3fab3b0.chunk.css.map",
     "static/js/2.a647a9e4.chunk.js.LICENSE.txt": "/financial-portfolio/static/js/2.a647a9e4.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.5d55e10b.js",
     "static/js/2.a647a9e4.chunk.js",
     "static/css/main.a3fab3b0.chunk.css",
-    "static/js/main.4c84ad83.chunk.js"
+    "static/js/main.eae2d889.chunk.js"
   ]
 }
