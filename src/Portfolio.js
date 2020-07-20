@@ -101,6 +101,7 @@ class Portfolio extends Component {
         console.log(newPortfolio[ticker]);
         await axios.patch(
             `${process.env.REACT_APP_URL}/users/portfolio/add`,
+            { withCredentials: true },
             addObject
         );
         this.setState({ portfolio: newPortfolio });
