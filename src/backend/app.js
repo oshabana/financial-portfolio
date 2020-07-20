@@ -8,11 +8,11 @@ const User = require("./models/user.js");
 const portfolio = require("./portfolio.js");
 const apiTools = require("./apiTools.js");
 
-const port = process.env.PORT || 3003;
+const port = process.env.PORT;
 const app = express();
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+//app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cp());
 
 app.get("/", (req, res) => {
