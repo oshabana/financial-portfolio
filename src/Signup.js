@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import "./styles/Signup.css";
 import axios from "axios";
-import { Redirect, Router, Route } from "react-router-dom";
-import Login from "./Login";
+import { Redirect } from "react-router-dom";
 
 class Signup extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email: "testfolio@test.com",
-            password1: "test123",
-            password2: "test123",
+            email: "",
+            password1: "",
+            password2: "",
             emailError: false,
             passwordError: false,
             signupError: false,
@@ -35,8 +34,7 @@ class Signup extends Component {
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL}/signup`,
-                { params: userInfo },
-                { withCredentials: true }
+                { params: userInfo }
             );
             if (response.data.err) this.setState({ emailError: true });
             this.setState({ signupCompleted: true });
