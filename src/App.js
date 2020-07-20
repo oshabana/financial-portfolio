@@ -39,8 +39,7 @@ class App extends Component {
 
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/portfolio`,
-                { withCredentials: true }
+                `${process.env.REACT_APP_URL}/portfolio`
             );
             if (response.status < 400) {
                 this.setState({ user: response.data, loggedIn: true });
