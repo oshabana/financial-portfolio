@@ -45,6 +45,7 @@ class App extends Component {
                 this.setState({ user: response.data, loggedIn: true });
             }
         } catch (err) {
+            console.log(err);
             console.log("Error getting your profile");
         }
     }
