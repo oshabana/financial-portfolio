@@ -24,10 +24,13 @@ class Login extends Component {
             password: this.state.password,
         };
 
-        const response = await axios.post(`${process.env.REACT_APP_URL}login`, {
-            params: userInfo,
-            withCredentials: true,
-        });
+        const response = await axios.post(
+            `${process.env.REACT_APP_URL}/login`,
+            {
+                params: userInfo,
+                withCredentials: true,
+            }
+        );
         if (response.data !== "") {
             this.props.login(response.data);
         } else this.setState({ isInvalid: true });
