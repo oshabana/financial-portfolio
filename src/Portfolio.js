@@ -69,7 +69,8 @@ class Portfolio extends Component {
         );
 
         let response = await axios.get(
-            `${process.env.REACT_APP_URL}/portfolio`
+            `${process.env.REACT_APP_URL}/portfolio`,
+            { withCredentials: true }
         );
         this.setState({
             portfolioProfile: {
@@ -85,7 +86,7 @@ class Portfolio extends Component {
         let newPortfolio = this.state.portfolio;
         let response = await axios.post(
             `${process.env.REACT_APP_URL}/users/portfolio/get-ticker`,
-            { ticker: ticker }
+            { ticker: ticker, withCredentials: true }
         );
         let totalAssetValue = response.data.price * quantity;
         newPortfolio[ticker] = [

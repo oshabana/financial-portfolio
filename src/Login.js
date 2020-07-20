@@ -26,7 +26,7 @@ class Login extends Component {
 
         const response = await axios.post(
             `${process.env.REACT_APP_URL}/login`,
-            { params: userInfo }
+            { params: userInfo, withCredentials: true }
         );
         if (response.data !== "") {
             this.props.login(response.data);

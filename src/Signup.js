@@ -34,7 +34,7 @@ class Signup extends Component {
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL}/signup`,
-                { params: userInfo }
+                { params: userInfo, withCredentials: true }
             );
             if (response.data.err) this.setState({ emailError: true });
             this.setState({ signupCompleted: true });
