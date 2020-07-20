@@ -23,7 +23,8 @@ class App extends Component {
     async componentDidMount() {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/portfolio`
+                `${process.env.REACT_APP_URL}/portfolio`,
+                { withCredentials: true }
             );
             console.log(response.data);
             this.setState({ loggedIn: true, user: response.data });
@@ -38,7 +39,8 @@ class App extends Component {
 
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/portfolio`
+                `${process.env.REACT_APP_URL}/portfolio`,
+                { withCredentials: true }
             );
             if (response.status < 400) {
                 this.setState({ user: response.data, loggedIn: true });
